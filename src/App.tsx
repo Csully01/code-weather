@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { Analytics } from "@vercel/analytics/react"
 import { SearchBar } from './components/SearchBar';
 import { fetchAllRepoData } from './lib/github';
 import { mapToWeather } from './lib/weather';
@@ -158,6 +159,7 @@ export default function App() {
   return (
     <>
       <SpeedInsights />
+      <Analytics/>
       <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center px-4 py-12 gap-8">
         {/* Title */}
         <div className="text-center">
