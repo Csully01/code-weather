@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { SearchBar } from './components/SearchBar';
 import { fetchAllRepoData } from './lib/github';
 import { mapToWeather } from './lib/weather';
@@ -155,38 +156,41 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center px-4 py-12 gap-8">
-      {/* Title */}
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-white mb-2">Code Weather</h1>
-        <p className="text-slate-400 text-sm">
-          Enter any public GitHub repo to check the forecast
-        </p>
-      </div>
-
-      {/* Search */}
-      <SearchBar onSearch={handleSearch} loading={loading} />
-
-      {/* Error */}
-      {error && (
-        <div className="w-full max-w-md bg-red-900/40 border border-red-500/40 rounded-xl px-4 py-3 text-red-300 text-sm">
-          {error}
+    <>
+      <SpeedInsights />
+      <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center px-4 py-12 gap-8">
+        {/* Title */}
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-white mb-2">Code Weather</h1>
+          <p className="text-slate-400 text-sm">
+            Enter any public GitHub repo to check the forecast
+          </p>
         </div>
-      )}
 
-      {/* Loading */}
-      {loading && <LoadingSkeleton />}
+        {/* Search */}
+        <SearchBar onSearch={handleSearch} loading={loading} />
 
-      {/* Result */}
-      {weather && !loading && <WeatherCard w={weather} />}
+        {/* Error */}
+        {error && (
+          <div className="w-full max-w-md bg-red-900/40 border border-red-500/40 rounded-xl px-4 py-3 text-red-300 text-sm">
+            {error}
+          </div>
+        )}
 
-      {/* Empty state hint */}
-      {!weather && !loading && !error && (
-        <p className="text-slate-600 text-xs">
-          Try: <span className="text-slate-500 font-mono">facebook/react</span> or{' '}
-          <span className="text-slate-500 font-mono">torvalds/linux</span>
-        </p>
-      )}
-    </div>
+        {/* Loading */}
+        {loading && <LoadingSkeleton />}
+
+        {/* Result */}
+        {weather && !loading && <WeatherCard w={weather} />}
+
+        {/* Empty state hint */}
+        {!weather && !loading && !error && (
+          <p className="text-slate-600 text-xs">
+            Try: <span className="text-slate-500 font-mono">facebook/react</span> or{' '}
+            <span className="text-slate-500 font-mono">torvalds/linux</span>
+          </p>
+        )}
+      </div>
+    </>
   );
 }
